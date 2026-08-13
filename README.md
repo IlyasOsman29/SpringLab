@@ -1,17 +1,16 @@
 # SpringLab
 
-SpringLab implements the Asteroids Core with the Spring dependency-injection component model. `AppConfig` enables component scanning. Spring constructs Player, Enemy and Asteroids providers, then constructs `Game` by injecting both `List<IGamePluginService>` and `List<IEntityProcessingService>` through its constructor. `Game` contains no `new PlayerPlugin()` or other concrete provider construction.
+This lab uses Spring to connect Asteroids components.
 
-Run the automated proof and package the lab:
+`AppConfig` enables component scanning. Spring finds the Player, Enemy and Asteroids classes and injects them into `Game` as lists of the two service interfaces. The game class therefore does not create the components itself.
 
-```powershell
-mvn clean test package
-```
+## Run
 
-Run the small console demonstration:
+Requirements: JDK 21 and Maven.
 
-```powershell
+```text
+mvn clean verify
 mvn exec:java
 ```
 
-The output lists the injected providers and shows that their entities were created and processed for one deterministic frame.
+The test checks that Spring injects all three components. The console example starts them and processes one frame.
